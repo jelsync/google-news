@@ -15,6 +15,9 @@ class CreateNoticiasTable extends Migration
     {
         Schema::create('noticias', function (Blueprint $table) {
             $table->id();
+            $table->string('TituloNoticia');
+            $table->string('Descripcion');
+            $table->string('Enlace');
             $table->timestamps();
         });
     }
