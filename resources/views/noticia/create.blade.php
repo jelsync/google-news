@@ -1,7 +1,7 @@
 Crear noticia
 
-<form action="" method="post" enctype="multipart/form-data">
-
+<form action="{{url('/noticia')}}" method="post" enctype="multipart/form-data">
+@csrf
     <label for="TituloNoticia">Titulo de la Noticia</label>
     <input type="text" name="TituloNoticia">
     <br>
@@ -11,5 +11,6 @@ Crear noticia
     <label for="Enlace">Enlace</label>
     <input type="text" name="Enlace">
     <br>
-    <input type="submit" name="Crear">
+    <input type="submit" value="Crear Noticia">
+
 </form>

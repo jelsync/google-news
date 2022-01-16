@@ -35,7 +35,13 @@ class NoticiaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        /** 
+         * RECIENDO DATOS NOTICIAS
+        */
+        // $datoNoticia = request()->all();
+        $datoNoticia = request()->except('_token');
+        Noticia::insert($datoNoticia);
+        return response()->json($datoNoticia);
     }
 
     /**
