@@ -12,7 +12,7 @@ Lista de noticias
         <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
       </div>
     </div>
-    <a href="#" class="btn btn-primary">Editar</a>
+    <a href="{{url('/noticia/'.$noticia->id.'/edit')}}" class="btn btn-primary">Editar</a>
     <form action="{{url('/noticia/'.$noticia->id)}}" method="post">
         @csrf
         {{method_field('DELETE')}}

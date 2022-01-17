@@ -62,9 +62,10 @@ class NoticiaController extends Controller
      * @param  \App\Models\Noticia  $noticia
      * @return \Illuminate\Http\Response
      */
-    public function edit(Noticia $noticia)
+    public function edit($id)
     {
-        //
+        $noticia=Noticia::findOrFail($id);
+        return view('noticia.edit', compact('noticia'));
     }
 
     /**
@@ -74,9 +75,13 @@ class NoticiaController extends Controller
      * @param  \App\Models\Noticia  $noticia
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Noticia $noticia)
+    public function update(Request $request, $id)
     {
-        //
+        $datoNoticia = request()->except('_token', '_method');
+        Noticia::where('id', '=', $id)->update($datoNoticia);
+        
+        $noticia=Noticia::findOrFail($id);
+        return view('noticia.edit', compact('noticia'));
     }
 
     /**
