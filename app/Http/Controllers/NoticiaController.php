@@ -14,7 +14,7 @@ class NoticiaController extends Controller
      */
     public function index()
     {
-        $datos['noticias']=Noticia::paginate(5);
+        $datos['noticias']=Noticia::orderBy('id', 'DESC')->get();
         return view('noticia.index', $datos);
     }
 
@@ -39,7 +39,7 @@ class NoticiaController extends Controller
         $campos=[
             'TituloNoticia'=>'required|string|max:100',
             'Descripcion'=>'required|string|max:200',
-            'Enlace'=>'required|string|max:300',
+            'Enlace'=>'required|string|max:500',
         ];
 
         $mensaje=[
@@ -54,7 +54,9 @@ class NoticiaController extends Controller
         // $datoNoticia = request()->all();
         $datoNoticia = request()->except('_token');
         Noticia::insert($datoNoticia);
-        return response()->json($datoNoticia);
+        // return response()->json($datoNoticia);
+        return redirect('noticia');
+
     }
 
     /**
@@ -89,11 +91,26 @@ class NoticiaController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $campos=[
+            'TituloNoticia'=>'required|string|max:100',
+            'Descripcion'=>'required|string|max:200',
+            'Enlace'=>'required|string|max:300',
+        ];
+
+        $mensaje=[
+            'required'=>'El :attribute es abligatorio.',
+            'Descripcion.required'=>'La :attribute es abligatoria.',
+        ];
+
+        $this->validate($request, $campos, $mensaje);
+
         $datoNoticia = request()->except('_token', '_method');
         Noticia::where('id', '=', $id)->update($datoNoticia);
         
         $noticia=Noticia::findOrFail($id);
-        return view('noticia.edit', compact('noticia'));
+        // return view('noticia.edit', compact('noticia'));
+        return redirect('noticia');
+
     }
 
     /**
