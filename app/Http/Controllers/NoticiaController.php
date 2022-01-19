@@ -36,6 +36,18 @@ class NoticiaController extends Controller
      */
     public function store(Request $request)
     {
+        $campos=[
+            'TituloNoticia'=>'required|string|max:100',
+            'Descripcion'=>'required|string|max:200',
+            'Enlace'=>'required|string|max:300',
+        ];
+
+        $mensaje=[
+            'required'=>'El :attribute es abligatorio.',
+            'Descripcion.required'=>'La :attribute es abligatoria.',
+        ];
+
+        $this->validate($request, $campos, $mensaje);
         /** 
          * RECIENDO DATOS NOTICIAS
         */
